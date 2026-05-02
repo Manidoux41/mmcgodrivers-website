@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 
 export async function POST(req: NextRequest) {
   let body: unknown;
@@ -24,13 +24,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Plateforme invalide." }, { status: 400 });
   }
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-      user: process.env.EMAIL_USER,
-      pass: process.env.EMAIL_PASS,
-    },
-  });
+  const resend = new Resend(process.env.RESEND_API_KEY);
 
   const htmlContent = `
     <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; background: #f0fdf4; border-radius: 12px; overflow: hidden;">
@@ -70,13 +64,21 @@ export async function POST(req: NextRequest) {
   `;
 
   try {
-    await transporter.sendMail({
-      from: `"MMC Go Drivers" <${process.env.EMAIL_USER}>`,
+    const { error } = await resend.emails.send({
+      from: "MMC Go Drivers <onboarding@resend.dev>",
       to: "superflyman90@gmail.com",
       subject: `[Bêta Testeur] ${nom.trim()} souhaite rejoindre le programme`,
       html: htmlContent,
       replyTo: email.trim(),
     });
+
+    if (error) {
+      console.error("Erreur Resend:", error);
+      return NextResponse.json(
+        { error: "Impossible d'envoyer l'email. Veuillez réessayer plus tard." },
+        { status: 500 }
+      );
+    }
 
     return NextResponse.json({ success: true });
   } catch (err) {
