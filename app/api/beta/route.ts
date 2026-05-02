@@ -9,7 +9,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Corps de requête invalide." }, { status: 400 });
   }
 
-  const { nom, email, vehicule, message } = body as Record<string, string>;
+  const { nom, email, vehicule, plateforme, message } = body as Record<string, string>;
 
   if (!nom || typeof nom !== "string" || nom.trim().length < 2) {
     return NextResponse.json({ error: "Nom invalide." }, { status: 400 });
@@ -19,6 +19,9 @@ export async function POST(req: NextRequest) {
   }
   if (!vehicule || typeof vehicule !== "string") {
     return NextResponse.json({ error: "Type de véhicule manquant." }, { status: 400 });
+  }
+  if (!plateforme || !(["iOS", "Android"] as string[]).includes(plateforme)) {
+    return NextResponse.json({ error: "Plateforme invalide." }, { status: 400 });
   }
 
   const transporter = nodemailer.createTransport({
@@ -48,6 +51,10 @@ export async function POST(req: NextRequest) {
           <tr style="border-top: 1px solid #dcfce7;">
             <td style="padding: 10px 0; color: #166534; font-weight: bold;">Type de véhicule</td>
             <td style="padding: 10px 0; color: #1a1a1a;">${escapeHtml(vehicule)}</td>
+          </tr>
+          <tr style="border-top: 1px solid #dcfce7;">
+            <td style="padding: 10px 0; color: #166534; font-weight: bold;">Plateforme</td>
+            <td style="padding: 10px 0; color: #1a1a1a;">${escapeHtml(plateforme)}</td>
           </tr>
           ${message ? `
           <tr style="border-top: 1px solid #dcfce7;">

@@ -8,6 +8,7 @@ export default function BetaModal({ onClose }: { onClose: () => void }) {
   const [nom, setNom] = useState("");
   const [email, setEmail] = useState("");
   const [vehicule, setVehicule] = useState("");
+  const [plateforme, setPlateforme] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<Status>("idle");
   const [errorMsg, setErrorMsg] = useState("");
@@ -21,7 +22,7 @@ export default function BetaModal({ onClose }: { onClose: () => void }) {
       const res = await fetch("/api/beta", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ nom, email, vehicule, message }),
+        body: JSON.stringify({ nom, email, vehicule, plateforme, message }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -138,6 +139,39 @@ export default function BetaModal({ onClose }: { onClose: () => void }) {
                   <option value="Véhicule léger professionnel">Véhicule léger professionnel</option>
                   <option value="Autre">Autre</option>
                 </select>
+              </div>
+
+              <div>
+                <label className="block text-sm font-semibold text-green-900 mb-1.5">
+                  Plateforme mobile <span className="text-red-500">*</span>
+                </label>
+                <div className="grid grid-cols-2 gap-3">
+                  {(["iOS", "Android"] as const).map((p) => (
+                    <button
+                      key={p}
+                      type="button"
+                      onClick={() => setPlateforme(p)}
+                      className={`flex items-center justify-center gap-2 border-2 rounded-xl px-4 py-3 text-sm font-semibold transition-colors ${
+                        plateforme === p
+                          ? "border-green-600 bg-green-50 text-green-800"
+                          : "border-gray-200 bg-white text-gray-600 hover:border-green-300"
+                      }`}
+                    >
+                      {p === "iOS" ? (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z" />
+                        </svg>
+                      ) : (
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                          <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.39.07 2.35.77 3.16.78.96-.03 1.87-.77 3.24-.77 1.67.07 2.85.73 3.43 2.05-3.1 1.88-2.62 6.55.76 7.88-.53.98-1.05 1.95-2.59 2.94zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z" />
+                        </svg>
+                      )}
+                      {p}
+                    </button>
+                  ))}
+                </div>
+                {/* champ caché pour la validation native du formulaire */}
+                <input type="text" required value={plateforme} readOnly className="sr-only" tabIndex={-1} aria-hidden />
               </div>
 
               <div>
