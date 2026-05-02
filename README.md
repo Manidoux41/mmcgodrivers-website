@@ -1,36 +1,69 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# MMC Go Drivers — Site vitrine
 
-## Getting Started
+Site web officiel de **MMC Go Drivers**, l'application mobile dédiée aux professionnels du transport routier : chauffeurs poids lourds, conducteurs de bus, taxis et gestionnaires de flotte.
 
-First, run the development server:
+## À propos du projet
+
+MMC Go Drivers est une application mobile (Flutter) conçue pour répondre aux besoins quotidiens des professionnels de la route. Ce dépôt contient le **site vitrine** développé avec Next.js, qui présente l'application, ses fonctionnalités et ses tarifs.
+
+### Pourquoi cette application ?
+
+Les professionnels du transport font face à des contraintes spécifiques qu'aucun outil grand public ne couvre pleinement : navigation adaptée aux gabarits des véhicules lourds, conformité à la Réglementation Sociale Européenne (RSE), gestion de planning de missions et administration de flotte. MMC Go Drivers centralise tous ces besoins dans une seule application.
+
+---
+
+## Fonctionnalités présentées
+
+| Fonctionnalité | Description |
+|---|---|
+| **Navigation Intelligente** | Calcul d'itinéraires tenant compte du gabarit du véhicule (hauteur, PTAC) — adapté aux poids lourds, bus et taxis |
+| **Planning & Missions** | Visualisation des missions quotidiennes et alertes RSE en temps réel |
+| **Gestion de Flotte** | Console d'administration pour gérer véhicules, chauffeurs et générer des feuilles de route PDF |
+| **Portefeuille de Documents** | Accès rapide aux permis, attestations et documents véhicules ; export KML/GPX des trajets |
+| **Conformité RSE** | Moteur de calcul respectant la Réglementation Sociale Européenne — alertes sur l'amplitude, la conduite continue et le temps journalier |
+| **Gestion d'Équipe** | Comptes chauffeurs sécurisés et tableau de bord interactif jour/semaine pour toute la flotte |
+
+---
+
+## Pages du site
+
+- `/` — Page d'accueil (hero, présentation des fonctionnalités, aperçu des tarifs, téléchargement)
+- `/tarifs` — Grille tarifaire détaillée
+- `/politique-de-confidentialite` — Politique de confidentialité
+- `/conditions-generales` — Conditions Générales d'Utilisation
+
+---
+
+## Offres tarifaires
+
+| Plan | Prix | Cible |
+|---|---|---|
+| **Gratuit** | 0 € / mois | Découverte sans engagement |
+| **Expert** | 2,99 € / mois | Conducteur indépendant |
+| **Professionnel** | 15,99 € / mois | Conducteur gérant sa propre activité |
+| **Diamant** | 399 € / mois | Entreprises de transport et gestionnaires de flotte |
+
+---
+
+## Stack technique
+
+- **Site vitrine** : [Next.js](https://nextjs.org) (App Router), TypeScript, Tailwind CSS
+- **Application mobile** : Flutter, OpenStreetMap
+
+---
+
+## Lancer le projet en local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir [http://localhost:3000](http://localhost:3000) dans le navigateur.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build de production
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npm run build
+npm run start
+```
