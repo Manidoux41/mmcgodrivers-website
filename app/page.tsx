@@ -1,4 +1,5 @@
 import Link from "next/link";
+import BetaBanner from "./components/BetaBanner";
 
 const features = [
   {
@@ -247,6 +248,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <BetaBanner />
 
       {/* ── DOWNLOAD ─────────────────────────────────────────── */}
       <section id="telecharger" className="py-20 px-4 bg-green-900 text-white scroll-mt-16">
