@@ -64,16 +64,25 @@ export async function POST(req: NextRequest) {
   `;
 
   try {
+    const toEmail = process.env.RESEND_TO_EMAIL;
+    if (!toEmail) {
+      console.error("RESEND_TO_EMAIL non défini");
+      return NextResponse.json(
+        { error: "Impossible d'envoyer l'email. Veuillez réessayer plus tard." },
+        { status: 500 }
+      );
+    }
+
     const { error } = await resend.emails.send({
       from: "MMC Go Drivers <onboarding@resend.dev>",
-      to: "superflyman90@gmail.com",
+      to: toEmail,
       subject: `[Bêta Testeur] ${nom.trim()} souhaite rejoindre le programme`,
       html: htmlContent,
       replyTo: email.trim(),
     });
 
     if (error) {
-      console.error("Erreur Resend:", error);
+      console.error("Erreur Resend (détail):", JSON.stringify(error));
       return NextResponse.json(
         { error: "Impossible d'envoyer l'email. Veuillez réessayer plus tard." },
         { status: 500 }
