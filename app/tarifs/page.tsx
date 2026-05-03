@@ -238,6 +238,34 @@ export default function Tarifs() {
         </div>
       </section>
 
+      {/* Coming soon Mac & PC */}
+      <section className="py-12 px-4 bg-white border-t border-green-100">
+        <div className="max-w-3xl mx-auto">
+          <div className="bg-green-900 text-white rounded-2xl p-8 flex flex-col md:flex-row items-center gap-6 shadow-lg">
+            <div className="flex-shrink-0 flex items-center justify-center w-16 h-16 rounded-2xl bg-green-700">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="currentColor" className="text-green-300">
+                <path d="M20 3H4c-1.1 0-2 .9-2 2v11c0 1.1.9 2 2 2h3l-1 1v2h12v-2l-1-1h3c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 13H4V5h16v11z" />
+              </svg>
+            </div>
+            <div className="flex-1 text-center md:text-left">
+              <div className="flex items-center justify-center md:justify-start gap-2 mb-2">
+                <span className="bg-green-400 text-green-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">
+                  Prochainement
+                </span>
+              </div>
+              <h3 className="text-xl font-bold mb-2">Version Mac &amp; PC</h3>
+              <p className="text-green-200 text-sm leading-relaxed">
+                Une application de bureau pour Mac et PC sera disponible prochainement.{" "}
+                <span className="text-green-300 font-semibold">
+                  Réservée exclusivement aux abonnés Premium
+                </span>{" "}
+                — entreprises et administrateurs (forfait Diamant).
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FAQ / note */}
       <section className="py-16 px-4 bg-green-50">
         <div className="max-w-3xl mx-auto">
