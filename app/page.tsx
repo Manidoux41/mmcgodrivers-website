@@ -1,5 +1,8 @@
 import Link from "next/link";
 import BetaBanner from "./components/BetaBanner";
+import { supabase, type Commentaire } from "@/lib/supabase";
+
+export const revalidate = 120;
 
 const features = [
   {
@@ -71,7 +74,16 @@ const pricingTeaser = [
   { name: "Diamant", price: "399 €", colorClass: "bg-green-900 border-green-900 text-white" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const { data: avisData } = await supabase
+    .from("commentaires")
+    .select("id, nom, message, note, created_at")
+    .eq("statut", "approuve")
+    .order("created_at", { ascending: false })
+    .limit(6);
+
+  const avisUne = (avisData ?? []) as Pick<Commentaire, "id" | "nom" | "message" | "note" | "created_at">[];
+
   return (
     <div className="flex flex-col">
       {/* ── HERO ─────────────────────────────────────────────── */}
@@ -248,6 +260,70 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ── TESTIMONIALS ─────────────────────────────────────── */}
+      {avisUne.length > 0 && (
+        <section className="py-20 px-4 bg-green-50">
+          <div className="max-w-6xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-green-900 mb-3">
+                Ce que disent nos utilisateurs
+              </h2>
+              <p className="text-gray-500 max-w-lg mx-auto text-sm">
+                Des professionnels du transport qui font confiance à MMC Go Drivers au quotidien.
+              </p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+              {avisUne.map((avis) => (
+                <div
+                  key={avis.id}
+                  className="bg-white rounded-2xl border border-green-100 shadow-sm p-6 flex flex-col gap-4 card-hover"
+                >
+                  {/* Stars */}
+                  <div className="flex gap-0.5">
+                    {[1, 2, 3, 4, 5].map((s) => (
+                      <svg key={s} width="15" height="15" viewBox="0 0 24 24"
+                        fill={s <= avis.note ? "#16a34a" : "none"}
+                        stroke={s <= avis.note ? "#16a34a" : "#d1d5db"}
+                        strokeWidth="1.5"
+                      >
+                        <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z" />
+                      </svg>
+                    ))}
+                  </div>
+                  {/* Quote */}
+                  <p className="text-gray-700 text-sm leading-relaxed flex-1">
+                    &ldquo;{avis.message}&rdquo;
+                  </p>
+                  {/* Author */}
+                  <div className="flex items-center gap-3 pt-2 border-t border-green-50">
+                    <div className="w-9 h-9 rounded-full bg-green-700 flex items-center justify-center text-white text-sm font-bold shrink-0">
+                      {avis.nom.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                      <p className="font-semibold text-green-900 text-sm">{avis.nom}</p>
+                      <p className="text-gray-400 text-xs">
+                        {new Date(avis.created_at).toLocaleDateString("fr-FR", {
+                          month: "long",
+                          year: "numeric",
+                        })}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            <div className="text-center mt-10">
+              <Link
+                href="/avis"
+                className="inline-flex items-center gap-2 text-green-700 hover:text-green-600 font-semibold text-sm transition-colors"
+              >
+                Voir tous les avis →
+              </Link>
+            </div>
+          </div>
+        </section>
+      )}
 
       <BetaBanner />
 

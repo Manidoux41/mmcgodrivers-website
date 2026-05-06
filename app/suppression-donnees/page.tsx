@@ -3,8 +3,6 @@
 import { useState } from "react";
 import Link from "next/link";
 
-export const metadata = undefined; // client component — metadata via layout
-
 const CATEGORIES = [
   { id: "localisation", label: "Données de localisation et trajets enregistrés" },
   { id: "compte", label: "Informations du compte (nom, prénom, identifiants)" },
