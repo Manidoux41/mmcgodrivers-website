@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export const metadata = {
   title: "Politique de Confidentialité — MMC Go Drivers",
   description:
@@ -170,19 +172,29 @@ export default function PolitiqueDeConfidentialite() {
 
           {/* Data deletion CTA */}
           <div className="mt-12 bg-green-900 text-white rounded-2xl p-8 text-center">
-            <h3 className="text-xl font-bold mb-2">Demande de suppression de données</h3>
-            <p className="text-green-200 text-sm mb-5">
-              Vous souhaitez supprimer votre compte et toutes vos données personnelles ?
+            <div className="w-12 h-12 bg-green-700 rounded-xl flex items-center justify-center mx-auto mb-4">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" className="text-green-300">
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zm2.46-7.12l1.41-1.41L12 12.59l2.12-2.12 1.41 1.41L13.41 14l2.12 2.12-1.41 1.41L12 15.41l-2.12 2.12-1.41-1.41L10.59 14l-2.13-2.12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z" />
+              </svg>
+            </div>
+            <h3 className="text-xl font-bold mb-2">Exercer votre droit à l&apos;effacement</h3>
+            <p className="text-green-200 text-sm mb-2 max-w-lg mx-auto">
+              Vous pouvez demander la suppression de tout ou partie de vos données personnelles
+              <strong className="text-white"> sans supprimer votre compte</strong>, directement
+              via notre formulaire dédié.
             </p>
-            <a
-              href="mailto:support@mmcgo-drivers.com?subject=Demande%20de%20suppression%20de%20compte"
+            <p className="text-green-400 text-xs mb-6">
+              Votre demande sera traitée dans un délai maximum de 30 jours (RGPD – Art. 17).
+            </p>
+            <Link
+              href="/suppression-donnees"
               className="inline-flex items-center gap-2 bg-green-400 hover:bg-green-300 text-green-950 font-semibold px-6 py-3 rounded-xl transition-colors"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+                <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM15.5 4l-1-1h-5l-1 1H5v2h14V4z" />
               </svg>
-              Envoyer une demande de suppression
-            </a>
+              Faire une demande de suppression
+            </Link>
           </div>
         </div>
       </section>

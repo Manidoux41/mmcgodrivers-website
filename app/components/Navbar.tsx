@@ -12,6 +12,7 @@ export default function Navbar() {
     { href: "/", label: "Accueil" },
     { href: "/#fonctionnalites", label: "Fonctionnalités" },
     { href: "/tarifs", label: "Tarifs" },
+    { href: "/avis", label: "Avis" },
     { href: "/politique-de-confidentialite", label: "Confidentialité" },
     { href: "/conditions-generales", label: "CGU" },
   ];
