@@ -116,7 +116,9 @@ export default async function Home() {
                 App Store
               </a>
               <a
-                href="#telecharger"
+                href="https://play.google.com/apps/testing/com.manidev41.mmcgodrivers"
+                target="_blank"
+                rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 bg-white/10 hover:bg-white/20 border border-white/30 text-white font-bold px-6 py-3.5 rounded-xl transition-colors text-base"
               >
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
@@ -346,7 +348,9 @@ export default async function Home() {
               </div>
             </a>
             <a
-              href="#"
+              href="https://play.google.com/apps/testing/com.manidev41.mmcgodrivers"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-4 bg-black hover:bg-gray-900 text-white px-6 py-4 rounded-2xl transition-colors min-w-56 shadow-xl"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
